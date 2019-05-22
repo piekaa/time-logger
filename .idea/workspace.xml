@@ -13,11 +13,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
+      <file leaf-file-name="main.go" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/main.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="717">
-              <caret line="67" column="37" selection-start-line="67" selection-start-column="37" selection-end-line="67" selection-end-column="37" />
+            <state relative-caret-position="252">
+              <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
             </state>
           </provider>
         </entry>
@@ -181,7 +181,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="init" />
-    <option name="LAST_COMMIT_MESSAGE" value="init" />
+    <MESSAGE value="added gitignore" />
+    <option name="LAST_COMMIT_MESSAGE" value="added gitignore" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/static/index.html">
@@ -315,27 +316,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="47" lean-forward="true" selection-start-line="47" selection-end-line="47" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/static/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="25" column="20" lean-forward="true" selection-start-line="25" selection-start-column="20" selection-end-line="25" selection-end-column="20" />
+        <state relative-caret-position="360">
+          <caret line="20" column="38" lean-forward="true" selection-start-line="20" selection-start-column="38" selection-end-line="20" selection-end-column="38" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="23" column="18" lean-forward="true" selection-start-line="23" selection-start-column="18" selection-end-line="23" selection-end-column="18" />
-          <folding>
-            <element signature="e#14#103#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="717">
-          <caret line="67" column="37" selection-start-line="67" selection-start-column="37" selection-end-line="67" selection-end-column="37" />
+        <state relative-caret-position="252">
+          <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
         </state>
       </provider>
     </entry>

@@ -10,6 +10,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"go.mongodb.org/mongo-driver/mongo/readpref"
 	"fmt"
+	"go.mongodb.org/mongo-driver/bson"
 )
 
 func main() {
@@ -35,8 +36,9 @@ func main() {
 }
 
 type Server struct {
-	client *mongo.Client
-	collection *mongo.Collection
+	client    *mongo.Client
+	checkouts *mongo.Collection
+	status    *mongo.Collection
 }
 
 func (s *Server) initDb() {
@@ -53,17 +55,32 @@ func (s *Server) initDb() {
 		panic(err)
 	}
 	fmt.Println("Connected to MongoDB")
-	s.collection = s.client.Database("time_logger").Collection("checkouts")
+	s.checkouts = s.client.Database("time_logger").Collection("checkouts")
+	s.status = s.client.Database("time_logger").Collection("status")
 }
 
-func (*Server) startCounter(c echo.Context) error {
-	return c.String(http.StatusOK, ":)")
+func (s *Server) startCounter(c echo.Context) error {
+	m := echo.Map{}
+	c.Bind(&m)
+	name := fmt.Sprintf("%v", m["name"])
+	fmt.Println(name)
+
+	//todo handle errors
+	s.checkouts.InsertOne(s.getCtx(), bson.M{"name": name, "time": 3.14159})
+
+	return c.String(http.StatusOK, "{}")
 }
 
 func (*Server) stopCounter(c echo.Context) error {
-	return c.String(http.StatusOK, ":)")
+	return c.String(http.StatusOK, "{}")
+}
+
+func (s *Server) getCtx() context.Context{
+	ctx, _ := context.WithTimeout(context.Background(), 5*time.Second)
+	return ctx
 }
 
 func currentTimeMillis() int64 {
 	return time.Now().UnixNano() / int64(time.Millisecond)
 }
+

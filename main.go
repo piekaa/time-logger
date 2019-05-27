@@ -64,18 +64,35 @@ func (s *Server) startCounter(c echo.Context) error {
 	c.Bind(&m)
 	name := fmt.Sprintf("%v", m["name"])
 	fmt.Println(name)
-
 	//todo handle errors
-	s.checkouts.InsertOne(s.getCtx(), bson.M{"name": name, "time": 3.14159})
+	result, _ := s.checkouts.InsertOne(s.getCtx(), bson.M{"name": name, "start": currentTimeMillis(), "_id": currentTimeMillis()})
+	_, err := s.status.UpdateOne(s.getCtx(), bson.M{"name": name}, bson.M{"$set": bson.M{"name": name, "status": "working", "id": result.InsertedID}}, upsert())
+
+	if err != nil {
+		fmt.Println(err)
+	}
 
 	return c.String(http.StatusOK, "{}")
 }
 
-func (*Server) stopCounter(c echo.Context) error {
+func (s *Server) stopCounter(c echo.Context) error {
+
+	m := echo.Map{}
+	c.Bind(&m)
+	name := fmt.Sprintf("%v", m["name"])
+	fmt.Println(name)
+	response := s.status.FindOne(s.getCtx(), bson.M{"name": name})
+
+	result := struct {
+		Id int64 `json:"_id"`
+	}{}
+	response.Decode(&result)
+	s.checkouts.UpdateOne(s.getCtx(), bson.M{"_id": result.Id}, bson.M{"$set": bson.M{"stop": currentTimeMillis()}})
+	s.status.UpdateOne(s.getCtx(), bson.M{"name": name}, bson.M{"$set": bson.M{"name": name, "status": "not working", "id": ""}}, upsert())
 	return c.String(http.StatusOK, "{}")
 }
 
-func (s *Server) getCtx() context.Context{
+func (s *Server) getCtx() context.Context {
 	ctx, _ := context.WithTimeout(context.Background(), 5*time.Second)
 	return ctx
 }
@@ -84,3 +101,7 @@ func currentTimeMillis() int64 {
 	return time.Now().UnixNano() / int64(time.Millisecond)
 }
 
+func upsert() *options.UpdateOptions {
+	b := true
+	return &options.UpdateOptions{Upsert: &b}
+}

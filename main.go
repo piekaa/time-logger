@@ -29,7 +29,7 @@ func main() {
 	// Routes
 	e.POST("/start-counter", s.startCounter)
 	e.POST("/stop-counter", s.stopCounter)
-	e.Static("/static", "static")
+	e.Static("/", "static")
 
 	// Start server
 	e.Logger.Fatal(e.Start(":8882"))

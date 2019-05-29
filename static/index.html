@@ -1,52 +1,28 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <base href="/"/>
-    <title>Ryanair</title>
+    <title>Time logger</title>
     <style>
-
-        html,body {
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .header {
-            background-color: #5aff30;
-            width: 100%;
-            height: 100px;
-        }
-
-        .footer {
-            background-color: #5aff30;
-            width: 100%;
-            height: 100px;
-        }
-
-        .container {
-            display: flex;
-            flex-grow: 1;
-            flex-direction: column;
-            background-color: #000bff;
-        }
-
-        .item {
-            background-color: #ffca5e;
-            height: 200px;
-            width: 100%;
-        }
-
-
     </style>
 </head>
 <body>
-<div class="header">header</div>
-<div class="container">
-    <div class="item"></div>
-    <div class="item"></div>
-</div>
 
-<div class="footer"></div>
+Hello <span id="name"></span>
 
 </body>
+
+<script>
+
+    window.onload = () => {
+        let name = window.localStorage.getItem("name");
+        if (name == null) {
+            window.location.href = "/login.html"
+        }
+        document.getElementById("name").innerText = name;
+    }
+
+</script>
+
 </html>
+
+

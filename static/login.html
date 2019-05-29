@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Time logger</title>
+    <style>
+    </style>
+</head>
+<body>
+
+<label>Name: <input id="name" type="text"></label>
+<button onclick="saveName()">OK</button>
+
+</body>
+
+<script>
+    function saveName() {
+        let name = document.getElementById("name");
+        if (name.value !== "") {
+            window.localStorage.setItem("name", name.value);
+            window.location.href = "/index.html";
+        }
+    }
+</script>
+</html>
+
+
